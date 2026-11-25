@@ -1,5 +1,5 @@
 from pypdf import PdfReader
-from docx import Document
+# from docx import Document
 import fitz
 
 
