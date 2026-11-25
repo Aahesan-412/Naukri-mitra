@@ -5,6 +5,9 @@ python-dotenv
 pydantic
 langgraph
 langchain
+langchain-groq
+groq
 pymupdf
 reportlab
 pypdf
+python-docx
