@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naukri Mitra | AI Job Application Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="glow" id="glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>TAILOR /// VERIFY /// APPROVE /// SEND /// TAILOR /// VERIFY /// APPROVE /// SEND /// TAILOR /// VERIFY /// APPROVE /// SEND /// </span>
+      <span>TAILOR /// VERIFY /// APPROVE /// SEND /// TAILOR /// VERIFY /// APPROVE /// SEND /// TAILOR /// VERIFY /// APPROVE /// SEND /// </span>
+    </div>
+  </div>
+
+  <header class="topbar wrap">
+    <div class="brand">
+      <span class="logo">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </span>
+      <span class="brand-name">NAUKRI<b>MITRA</b></span>
+    </div>
+    <span class="live"><i></i> AGENT LIVE</span>
+  </header>
+
+  <main class="app wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="kicker">AI JOB APPLICATION AGENT</span>
+        <h1>YOUR RESUME.<br><span class="hl">REBUILT</span><br>FOR EVERY JOB.</h1>
+        <p>Upload your resume and paste a job description. The agent finds your gaps, tailors your resume without inventing a single skill, writes the email, and sends it only after you say yes.</p>
+        <ul class="perks">
+          <li>ONE-PAGE PDF</li>
+          <li>FACT-CHECKED</li>
+          <li>YOU APPROVE</li>
+        </ul>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb"></div>
+        <div class="sticker s1">NO FAKE SKILLS.<br>EVER.</div>
+        <div class="sticker s2">YOU APPROVE.<br>THEN IT SENDS.</div>
+      </div>
+    </section>
+
+    <ol class="stepper" id="stepper">
+      <li class="active" data-step="1"><span class="num">01</span><span class="lbl">Upload</span></li>
+      <li data-step="2"><span class="num">02</span><span class="lbl">Analyze</span></li>
+      <li data-step="3"><span class="num">03</span><span class="lbl">Review &amp; send</span></li>
+    </ol>
+
+    <!-- SCREEN 1: upload -->
+    <section class="screen active" id="screen-1">
+      <div class="card">
+        <span class="tag">01 / UPLOAD</span>
+        <div class="card-head">
+          <h2>START YOUR APPLICATION</h2>
+          <p>Nothing is emailed until you approve it.</p>
+        </div>
+
+        <label class="drop" id="drop" for="resume-input">
+          <input type="file" id="resume-input" accept="application/pdf,.pdf" hidden>
+          <span class="drop-icon">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>
+          </span>
+          <strong id="drop-title">DROP YOUR RESUME HERE</strong>
+          <small id="drop-sub">PDF only, up to 5 MB. Or click to browse.</small>
+        </label>
+
+        <div class="field">
+          <div class="field-top">
+            <label for="jd">Job description</label>
+            <span class="count" id="jd-count">0 characters</span>
+          </div>
+          <textarea id="jd" rows="9" placeholder="Paste the full job description here..."></textarea>
+        </div>
+
+        <button class="btn primary lg" id="analyze-btn" type="button">
+          Analyze my fit
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: analysis -->
+    <section class="screen stack" id="screen-2">
+      <div class="card result-top">
+        <span class="tag">02 / ANALYSIS</span>
+        <div class="gauge">
+          <svg viewBox="0 0 120 120" width="170" height="170">
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ff3d00"/>
+                <stop offset="55%" stop-color="#ff8a00"/>
+                <stop offset="100%" stop-color="#ffd166"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="60" cy="60" r="52"/>
+            <circle class="ring" id="ring" cx="60" cy="60" r="52" stroke="url(#gaugeGrad)"/>
+          </svg>
+          <div class="gauge-text"><b id="score-num">0</b><small>/ 100</small></div>
+        </div>
+        <div class="result-copy">
+          <h2>YOUR MATCH WITH THIS ROLE</h2>
+          <p id="score-text"></p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3><i class="dot green"></i> What you already match</h3>
+          <div class="chips" id="match-chips"></div>
+        </div>
+        <div class="card">
+          <h3><i class="dot red"></i> Gaps found in the JD</h3>
+          <div class="chips" id="missing-chips"></div>
+        </div>
+      </div>
+
+      <div class="card" id="improve-card">
+        <h3><i class="dot"></i> Suggested improvements</h3>
+        <ul class="list" id="improve-list"></ul>
+      </div>
+
+      <div class="card">
+        <span class="tag">HONESTY CHECK</span>
+        <div class="card-head">
+          <h3>Tell the truth, only the truth</h3>
+          <p>Answer only with what you have really done. Anything you mark "No" is never added to your resume.</p>
+        </div>
+        <div id="questions"></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" id="back-1" type="button">Back</button>
+        <button class="btn primary lg" id="generate-btn" type="button">
+          Generate resume &amp; email
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: review & send -->
+    <section class="screen" id="screen-3">
+      <div class="split">
+        <div class="card preview">
+          <span class="tag">03 / RESUME</span>
+          <div class="card-head row">
+            <h3>Tailored resume</h3>
+            <span id="fact-badge" class="badge"></span>
+          </div>
+          <div id="fact-issues" class="issues hidden"></div>
+          <iframe id="pdf-frame" title="Resume preview"></iframe>
+          <div class="file-row">
+            <span id="file-name"></span>
+            <a id="pdf-open" href="#" target="_blank" rel="noopener">OPEN PDF</a>
+          </div>
+        </div>
+
+        <div class="card mail">
+          <span class="tag">03 / EMAIL</span>
+          <div class="card-head">
+            <h3>Application email</h3>
+            <p>Edit anything before it goes out.</p>
+          </div>
+
+          <div class="field">
+            <label for="to">To</label>
+            <input id="to" type="email" placeholder="recruiter@company.com" autocomplete="off">
+            <div class="chips found" id="found"></div>
+            <small class="hint" id="to-hint"></small>
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" type="text">
+          </div>
+
+          <div class="field">
+            <label for="body">Message</label>
+            <textarea id="body" rows="11"></textarea>
+          </div>
+
+          <div class="attach">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            <span id="attach-name"></span>
+          </div>
+
+          <label class="check">
+            <input type="checkbox" id="reviewed">
+            <span>I have read the resume and the email, and everything in them is true.</span>
+          </label>
+
+          <div class="actions">
+            <button class="btn ghost" id="back-2" type="button">Back</button>
+            <button class="btn primary lg" id="send-btn" type="button" disabled>
+              Approve &amp; send
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: success -->
+    <section class="screen" id="screen-4">
+      <div class="card success">
+        <div class="tick">
+          <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h2>SENT.</h2>
+        <p id="sent-text"></p>
+        <button class="btn primary" id="restart-btn" type="button">Apply to another job</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">NAUKRI MITRA /// YOUR RESUME IS EMAILED ONLY AFTER YOU APPROVE IT</footer>
+
+  <div class="overlay" id="loader">
+    <div class="loader-box">
+      <div class="spinner"></div>
+      <h3 id="loader-title">Working...</h3>
+      <p id="loader-msg"></p>
+      <div class="bar"><i></i></div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
