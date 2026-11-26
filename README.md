@@ -27,10 +27,6 @@ Tested manually on real resumes against real job descriptions, including deliber
 
 **Limitations:** small manual evaluation, no formal metrics yet. The fact-checker is also an LLM, so a pass is strong evidence, not proof. The email draft is not fact-checked yet.
 
-## Limitations and future work
-- RAG is not implemented yet. Planned: a profile bank (vector database) so the writer uses only retrieved facts.
-- Fact-check the email draft and build a labeled test set with real metrics.
-- Only text-based PDFs, single user, no login.
 
 ## Tech stack
 Python, LangGraph, LangChain, Pydantic, FastAPI, PyMuPDF, ReportLab, SMTP (Gmail), HTML/CSS/JavaScript.
